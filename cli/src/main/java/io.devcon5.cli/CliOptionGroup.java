@@ -6,8 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation to indicate that a field should be populated by a bean containing several {@link io.devcon5.cli.CliOption}s
-
+ * Annotation to indicate that a field should be populated by a bean containing several {@link
+ * io.devcon5.cli.CliOption}s
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

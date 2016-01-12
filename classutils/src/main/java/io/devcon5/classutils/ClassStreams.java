@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Utility class for dealing with classes and streams Created by m4g on 11.01.2016.
+ * Utility class for dealing with classes and streams
  */
 public final class ClassStreams {
 

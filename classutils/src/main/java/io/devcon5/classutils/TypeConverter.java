@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A converter for converting string values into primitive types. <br> Created by m4g on 11.01.2016.
+ * A converter for converting string values into primitive types.
  */
 public class TypeConverter {
 

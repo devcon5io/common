@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 /**
- * Created by m4g on 11.01.2016.
  */
 public class ClassStreamsTest {
 

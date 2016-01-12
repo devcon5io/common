@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 /**
- * Created by m4g on 11.01.2016.
  */
 public class TypeConverterTest {
 
