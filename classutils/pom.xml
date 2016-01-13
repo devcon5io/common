@@ -8,5 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>classutils</artifactId>
+    <name>${artifactId}</name>
+    <description>Utilities for dealing with classes.</description>
 
 </project>
