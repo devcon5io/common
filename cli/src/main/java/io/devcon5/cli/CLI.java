@@ -9,6 +9,9 @@ import org.apache.commons.cli.ParseException;
 
 /**
  * CLI helper to parse arguments and parse them into a business class with field annotated to map the arguments.
+ * Use {@link CliOption} which fields should be populated from command line argument or {@link CliOptionGroup} to
+ * declare objects that are populated by a set of arguments. To perform additional initialization steps annotate a
+ * parameter-less method with {@link PostInject}.
  */
 public class CLI {
 

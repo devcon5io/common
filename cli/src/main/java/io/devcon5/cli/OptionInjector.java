@@ -47,6 +47,20 @@ public class OptionInjector {
         if(target == null) {
             return;
         }
+        preFlightCheckFields(target);
+        final List<Method> methods = getPostInjectMethods(target);
+        preFlightCheckMethods(target, methods);
+    }
+
+    /**
+     * Recursively performs the prefligh check on all {@link CliOptionGroup} annotated fields of the target
+     * including supertypes.
+     * @param target
+     *  the target on whose fields the preflight check should be performed.
+     * @param <T>
+     */
+    private <T> void preFlightCheckFields(final T target) {
+
         ClassStreams.selfAndSupertypes(target.getClass())
                     .map(Class::getDeclaredFields)
                     .flatMap(Arrays::stream)
@@ -59,14 +73,37 @@ public class OptionInjector {
                             throw new RuntimeException(e);
                         }
                     });
+    }
 
-        List<Method> methods = ClassStreams.selfAndSupertypes(target.getClass())
+    /**
+     * Collects the methods annotated with {@link PostInject} in order of priority.
+     * @param target
+     *  the target object whose methods should be collected. Supertype methods are collected as well.
+     * @param <T>
+     * @return
+     *  a list of methods annotated with {@link PostInject} ordered by priority
+     */
+    private <T> List<Method> getPostInjectMethods(final T target) {
+
+        final List<Method> methods = ClassStreams.selfAndSupertypes(target.getClass())
                                            .map(Class::getDeclaredMethods)
                                            .flatMap(Arrays::stream)
                                            .filter(method -> method.getAnnotation(PostInject.class) != null)
                                            .collect(Collectors.toList());
         Collections.sort(methods, (m1, m2) -> m1.getAnnotation(PostInject.class).value() - m2.getAnnotation
                 (PostInject.class).value());
+        return methods;
+    }
+
+    /**
+     * Invokes all methods in the list on the target.
+     * @param target
+     *  the target on which the methods should be ivoked
+     * @param methods
+     *  the methods to be invoked in order of priority
+     * @param <T>
+     */
+    private <T> void preFlightCheckMethods(final T target, final List<Method> methods) {
 
         methods.forEach(m -> {m.setAccessible(true);
             try {
@@ -75,7 +112,6 @@ public class OptionInjector {
                 throw new RuntimeException(e);
             }
         });
-
     }
 
     /**
