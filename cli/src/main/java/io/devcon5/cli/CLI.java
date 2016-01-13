@@ -8,7 +8,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 /**
- * CLI helper to parse arguments and inject them into a business class with field annotated to map the arguments.
+ * CLI helper to parse arguments and parse them into a business class with field annotated to map the arguments.
  */
 public class CLI {
 
@@ -23,27 +23,27 @@ public class CLI {
      * Creates a new CLI instance for the given arguments.
      *
      * @param args
-     *         the arguments to inject
+     *         the arguments to parse
      *
      * @return
      */
-    public static CLI inject(String... args) {
+    public static CLI parse(String... args) {
         return new CLI(args);
     }
 
     /**
-     * The target object to inject the arguments into. One CLI can be injected into multiple targets. The target may
+     * The target object to parse the arguments into. One CLI can be injected into multiple targets. The target may
      * have fields annotated with {@link io.devcon5.cli.CliOption} or {@link io.devcon5.cli.CliOptionGroup} which are
      * required to populate those fields with values from the argline
      *
      * @param target
-     *         the target to inject values into
+     *         the target to parse values into
      * @param <T>
      *         the type of the target
      *
-     * @return the target reference
+     * @return true, if the arguments could be successfully parsed and assigned
      */
-    public <T> T into(T target) {
+    public <T> boolean into(T target) {
 
         final Options opts = new OptionCollector().collectFrom(target.getClass());
         final CommandLineParser parser = new DefaultParser();
@@ -52,8 +52,9 @@ public class CLI {
             new OptionInjector(commandLine).injectInto(target);
         } catch (ParseException e) {
             printUsage(opts);
+            return false;
         }
-        return target;
+        return true;
     }
 
     /**

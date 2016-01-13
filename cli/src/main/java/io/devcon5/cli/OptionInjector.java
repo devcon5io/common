@@ -1,14 +1,20 @@
 package io.devcon5.cli;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Option;
+import java.util.stream.Collectors;
 
 import io.devcon5.classutils.ClassStreams;
 import io.devcon5.classutils.TypeConverter;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.Option;
 
 /**
  * Injects the parameters from the command line into a given target.
@@ -28,13 +34,55 @@ public class OptionInjector {
 
     public <T> void injectInto(T target) {
         injectParameters(target, options);
+        preFlightCheck(target);
+    }
+
+    /**
+     * Invokes the methodss annotated with {@link PostInject} on the target and its injected option.
+     * @param target
+     *  the target to invoke the post inject methods
+     * @param <T>
+     */
+    private <T> void preFlightCheck(final T target) {
+        if(target == null) {
+            return;
+        }
+        ClassStreams.selfAndSupertypes(target.getClass())
+                    .map(Class::getDeclaredFields)
+                    .flatMap(Arrays::stream)
+                    .filter(field -> field.getAnnotation(CliOptionGroup.class) != null)
+                    .forEach(field -> {
+                        field.setAccessible(true);
+                        try {
+                            preFlightCheck(field.get(target));
+                        } catch (IllegalAccessException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
+        List<Method> methods = ClassStreams.selfAndSupertypes(target.getClass())
+                                           .map(Class::getDeclaredMethods)
+                                           .flatMap(Arrays::stream)
+                                           .filter(method -> method.getAnnotation(PostInject.class) != null)
+                                           .collect(Collectors.toList());
+        Collections.sort(methods, (m1, m2) -> m1.getAnnotation(PostInject.class).value() - m2.getAnnotation
+                (PostInject.class).value());
+
+        methods.forEach(m -> {m.setAccessible(true);
+            try {
+                m.invoke(target);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
     /**
      * Inject parameter values from the map of options.
      *
      * @param target
-     *         the target instance to inject cli parameters
+     *         the target instance to parse cli parameters
      * @param options
      *         the map of options, mapping short option names to {@link org.apache.commons.cli.Option} instances
      */
