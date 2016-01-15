@@ -25,6 +25,11 @@
             <artifactId>classutils</artifactId>
             <version>1.2-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>io.inkstand</groupId>
+            <artifactId>scribble-core</artifactId>
+            <version>0.3.1</version>
+        </dependency>
     </dependencies>
 
 
