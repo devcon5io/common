@@ -18,10 +18,6 @@ package io.devcon5.mixin;
 
 import static java.lang.reflect.Proxy.newProxyInstance;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.invoke.MethodHandles;
@@ -35,13 +31,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 /**
  * Utility for adding mixins to instances at runtime. But not only default methods can be added but dynamic
  * implementations as well by providing a javascript based implementation for the methods. Created by Gerald Mücke on
  * 11.09.2015.
  */
-public class Mixin {
+public final class Mixin {
+
+    private Mixin() {
+    }
 
     /**
      * Creates a builder for defining the mixin assignment. The builder can be applied to multiple objects using the

@@ -56,6 +56,8 @@ public class OptionInjectorTest {
         return opt;
     }
 
+    ////////////////// Classes that provide the structure for the injection //////////////////
+
     static class CliBase {
 
         @CliOption(value = "b",
