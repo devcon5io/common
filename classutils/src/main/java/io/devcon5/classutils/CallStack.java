@@ -39,11 +39,15 @@ public final class CallStack {
 
     /**
      * Enhances the target object to track the invocation of methods of the target. The current method can
-     * be retrieved by invoking {@link CallStack#currentMethod}
+     * be retrieved by invoking {@link #currentMethod()}
      * @param target
      *  the target object whose method invocations should be tracked
      * @param <T>
+     *      the type of the tracked object
      * @return
+     *  a tracked object whose method references will be put onto a stack so that the most recent method can
+     *  be retrieved using the {@link #currentMethod()} call
+     *
      */
     public static <T> T track(T target){
 
@@ -72,7 +76,8 @@ public final class CallStack {
     }
 
     /**
-     * Returns the caller class of the calling method.<br> For example: <br> A.calling() -> B.called() B.called() ->
+     * Returns the caller class of the calling method.<br> For example: <br> A.calling() -&gt; B.called() B.called()
+     * -&gt:
      * getCallerClass(): A <br> If a thread context classloader is defined, it will be used for loading the class,
      * otherwise the default class loader is used.
      *
