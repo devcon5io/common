@@ -72,7 +72,8 @@ public final class CallStack {
     }
 
     /**
-     * Returns the caller class of the calling method.<br> For example: <br> A.calling() -> B.called() B.called() ->
+     * Returns the caller class of the calling method.<br> For example: <br> A.calling() -&gt; B.called() B.called()
+     * -gt;
      * getCallerClass(): A <br> If a thread context classloader is defined, it will be used for loading the class,
      * otherwise the default class loader is used.
      *
