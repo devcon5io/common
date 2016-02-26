@@ -37,6 +37,7 @@ public class ResourceResolver {
      * Creates a new ResourceResolver that will fail with an {@link AssertionError} if the resource can not
      * be located.
      * @param failOnMissingResource
+     *  set to true if an exception should be thrown in case the resource is not found
      */
     public ResourceResolver(boolean failOnMissingResource) {
         this.failOnMissingResource = failOnMissingResource;
@@ -66,6 +67,7 @@ public class ResourceResolver {
      *  the consumer class of the resource. It's classloader is used for the lookup and it's location is used
      *  as reference point for resolving relative path names
      * @return
+     *  a URL to the resolved resource
      */
     public URL resolve(String resource, Class consumer){
 
