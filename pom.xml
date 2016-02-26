@@ -21,7 +21,7 @@
     <groupId>io.devcon5</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>1.3</version>
+    <version>1.2-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>Common tools and utilities.</description>
 
