@@ -51,6 +51,9 @@ public class TypeConverter {
      * @param targetType
      *         the type into which the string value should be converted.
      *
+     *  @param <T>
+     *       the type of the target type
+     *
      * @return the converted value.
      */
     public <T> T to(Class<T> targetType) {
