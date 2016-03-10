@@ -1,11 +1,11 @@
 /*
- * Copyright 2015 DevCon5 GmbH, info@devcon5.io
+ * Copyright 2015-2016 DevCon5 GmbH, info@devcon5.ch
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,7 +24,7 @@ import java.io.Reader;
 import org.junit.Test;
 
 /**
- * Created by Gerald Mücke on 11.09.2015.
+ * Created by Gerald Mï¿½cke on 11.09.2015.
  */
 
 public class MixinTest {
