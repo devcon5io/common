@@ -113,6 +113,14 @@ public class JarScanner {
         return this;
     }
 
+    /**
+     * Converts a url to uri without throwing a checked exception. In case an URI syntax exception occurs, an
+     * IllegalArgumentException is thrown.
+     * @param u
+     *  the url to be converted
+     * @return
+     *  the converted uri
+     */
     private static URI toUri(final URL u) {
 
         try {
