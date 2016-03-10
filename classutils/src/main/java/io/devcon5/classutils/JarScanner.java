@@ -31,7 +31,7 @@ public class JarScanner {
     /**
      * Set of Jar locators to be scanned
      */
-    private final Set<URL> jars = new HashSet<>();
+    private final Set<URI> jars = new HashSet<>();
 
     /**
      * env map for opening Zip-Filesystems in read-only mode
@@ -92,8 +92,17 @@ public class JarScanner {
      * @return this scanner
      */
     public JarScanner addJar(Collection<URL> jars) {
-        this.jars.addAll(jars);
+        this.jars.addAll(jars.stream().map(JarScanner::toUri).collect(Collectors.toList()));
         return this;
+    }
+
+    private static URI toUri(final URL u) {
+
+        try {
+            return u.toURI();
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException("Could not convert URL "+u+" to uri",e);
+        }
     }
 
     /**
@@ -183,16 +192,12 @@ public class JarScanner {
     /**
      * Creates a jar-protocol uri for the specified url
      *
-     * @param u
-     *         the url to be accessed as jar file
+     * @param uri
+     *         the uri for which to create a jar uri
      *
      * @return the URI for the jar file
      */
-    private static URI createJarUri(URL u) {
-        try {
-            return URI.create("jar:" + u.toURI());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+    private static URI createJarUri(URI uri) {
+        return URI.create("jar:" + uri);
     }
 }
