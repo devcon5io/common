@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -26,12 +27,12 @@ public class JarScanner {
     /**
      * Set of entry-prefixes to be excluded from scanning
      */
-    private final Set<String> ignore = new HashSet<>();
+    private final Set<String> ignoredFolders = new HashSet<>();
 
     /**
      * Set of Jar locators to be scanned
      */
-    private final Set<URI> jars = new HashSet<>();
+    private final Set<URI> jars = new ConcurrentSkipListSet<>();
 
     /**
      * env map for opening Zip-Filesystems in read-only mode
@@ -54,7 +55,7 @@ public class JarScanner {
      * @return this scanner
      */
     public JarScanner ignore(Collection<String> folders) {
-        this.ignore.addAll(folders);
+        this.ignoredFolders.addAll(folders);
         return this;
     }
 
@@ -186,7 +187,7 @@ public class JarScanner {
      */
     private boolean isIgnored(Path p) {
         final String path = toFQName(p);
-        return this.ignore.stream().anyMatch(path::startsWith);
+        return this.ignoredFolders.stream().anyMatch(path::startsWith);
     }
 
     /**
