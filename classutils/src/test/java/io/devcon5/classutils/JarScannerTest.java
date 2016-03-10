@@ -21,8 +21,8 @@ public class JarScannerTest {
     @Test
     public void testIgnore_list() throws Exception {
         //prepare
-        URL jar1Url = JarScannerTest.class.getResource("test1.jar");
-        URL jar2Url = JarScannerTest.class.getResource("test2.jar");
+        URL jar1Url = JarScannerTest.class.getResource("test1.zip");
+        URL jar2Url = JarScannerTest.class.getResource("test2.zip");
         subject.addJar(Arrays.asList(jar1Url, jar2Url));
 
         //act
@@ -38,8 +38,8 @@ public class JarScannerTest {
     @Test
     public void testIgnore_varargs() throws Exception {
         //prepare
-        URL jar1Url = JarScannerTest.class.getResource("test1.jar");
-        URL jar2Url = JarScannerTest.class.getResource("test2.jar");
+        URL jar1Url = JarScannerTest.class.getResource("test1.zip");
+        URL jar2Url = JarScannerTest.class.getResource("test2.zip");
         subject.addJar(Arrays.asList(jar1Url, jar2Url));
 
         //act
@@ -56,8 +56,8 @@ public class JarScannerTest {
     @Test
     public void testAddJar() throws Exception {
         //prepare
-        URL jar1Url = JarScannerTest.class.getResource("test1.jar");
-        URL jar2Url = JarScannerTest.class.getResource("test2.jar");
+        URL jar1Url = JarScannerTest.class.getResource("test1.zip");
+        URL jar2Url = JarScannerTest.class.getResource("test2.zip");
 
         //act
         subject.addJar(Arrays.asList(jar1Url, jar2Url));
@@ -72,8 +72,8 @@ public class JarScannerTest {
     @Test
     public void testAddJar_varargs() throws Exception {
         //prepare
-        URL jar1Url = JarScannerTest.class.getResource("test1.jar");
-        URL jar2Url = JarScannerTest.class.getResource("test2.jar");
+        URL jar1Url = JarScannerTest.class.getResource("test1.zip");
+        URL jar2Url = JarScannerTest.class.getResource("test2.zip");
 
         //act
         subject.addJar(jar1Url, jar2Url);
@@ -88,7 +88,7 @@ public class JarScannerTest {
     @Test
     public void testScanPackages() throws Exception {
         //prepare
-        URL jarUrl = JarScannerTest.class.getResource("test1.jar");
+        URL jarUrl = JarScannerTest.class.getResource("test1.zip");
         subject.addJar(jarUrl);
 
         //act
@@ -103,7 +103,7 @@ public class JarScannerTest {
     @Test
     public void testScanClasses() throws Exception {
         //prepare
-        URL jarUrl = JarScannerTest.class.getResource("test1.jar");
+        URL jarUrl = JarScannerTest.class.getResource("test1.zip");
         subject.addJar(jarUrl);
 
         //act
