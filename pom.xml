@@ -30,10 +30,42 @@
     <name>${project.artifactId}</name>
     <description>Common tools and utilities.</description>
 
+    <developers>
+        <developer>
+            <name>Gerald Muecke</name>
+            <email>gerald.muecke@devcon5.ch</email>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>DevCon5 GmbH</name>
+        <url>http://www.devcon5.ch</url>
+    </organization>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/devcon5io/${project.name}/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:devcon5io/${project.name}.git</connection>
+        <developerConnection>scm:git:git@github.com:devcon5io/${project.name}.git</developerConnection>
+        <url>https://github.com/devcon5io/${project.name}</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>LICENSE.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <modules>
         <module>mixin</module>
         <module>classutils</module>
         <module>cli</module>
+        <module>passwords</module>
     </modules>
 
     <properties>
